@@ -1,11 +1,38 @@
 class Api::ActorsController < ApplicationController
-  def one_actor
-    @actor = Actor.first
-    render 'one_actor.json.jbuilder'
+
+  def index
+    @actors = Actor.all
+    render 'actors_index.json.jbuilder'
   end
 
-  def one_actor_params
-    @actor_params = Actor.find_by(id: params["actor"])
-    render 'one_actor_query.json.jbuilder'
+  def show
+    @actor = Actor.find(params[:id])
+    render 'actor_show.json.jbuilder'
   end
+
+  def create
+    @actor = Actor.new(
+      first_name: params[:first_name],
+      last_name: params[:last_name],
+      known_for: params[:known_for]
+      )
+    @actor.save
+    render 'actor_show.json.jbuilder'
+  end
+
+  def update
+    @actor = Actor.find(params[:id])
+    @actor.first_name = params[:first_name] || @actor.first_name
+    @actor.last_name = params[:last_name] || @actor.last_name
+    @actor.known_for = params[:known_for] || @actor.known_for
+    @actor.save
+    render 'actor_show.json.jbuilder'
+  end
+
+  def destroy
+    @actor = Actor.find(params[:id])
+    @actor.destroy
+    render json: {message: "This actor has successfully been destroyed."}
+  end
+
 end

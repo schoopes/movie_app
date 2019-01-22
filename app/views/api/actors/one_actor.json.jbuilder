@@ -1,1 +1,0 @@
-json.actor = @actor
