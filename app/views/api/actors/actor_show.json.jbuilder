@@ -1,1 +1,1 @@
-json.actor @actor
+json.partial! "actor.json.jbuilder", actor: @actor
