@@ -1,4 +1,6 @@
 class Api::MoviesController < ApplicationController
+  before_action :authenticate_user
+
   def index
     @movies = Movie.where("english = ?", true)
     render 'movies_index.json.jbuilder'
