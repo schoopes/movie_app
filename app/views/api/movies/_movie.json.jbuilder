@@ -3,3 +3,4 @@ json.year movie.year
 json.director movie.director
 json.plot movie.plot
 json.english movie.english
+json.genres movie.genre_names
