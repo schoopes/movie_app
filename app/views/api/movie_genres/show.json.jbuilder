@@ -1,0 +1,1 @@
+json.partial! "movie_genre.json.jbuilder", movie_genre: @movie_genre
