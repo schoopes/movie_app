@@ -1,14 +1,14 @@
 class Api::MoviesController < ApplicationController
-  before_action :authenticate_user
+  # before_action :authenticate_user
 
   def index
-    @movies = Movie.where("english = ?", true)
-    render 'movies_index.json.jbuilder'
+    @movies = Movie.where(english: true)
+    render 'index.json.jbuilder'
   end
 
   def show
     @movie = Movie.find(params[:id])
-    render 'movie_show.json.jbuilder'
+    render 'show.html.erb'
   end
 
   def create
@@ -20,7 +20,7 @@ class Api::MoviesController < ApplicationController
       english: params[:english]
       )
     if @movie.save
-      render 'movie_show.json.jbuilder'
+      render 'show.json.jbuilder'
     else
       render json: {errors: @movie.errors.full_messages}, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class Api::MoviesController < ApplicationController
     @movie.plot = params[:plot] || @movie.plot
     @movie.english = params[:english] || @movie.english
     if @movie.save
-      render 'movie_show.json.jbuilder'
+      render 'show.json.jbuilder'
     else
       render json: {errors: @movie.errors.full_messages}, status: :unprocessable_entity
     end
